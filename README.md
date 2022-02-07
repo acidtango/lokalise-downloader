@@ -18,7 +18,7 @@ npm install --save-dev @acid-tango/lokalise-downloader
 ## CLI Usage
 
 ```
-lokalise-downloader <apiKey> <projectId> tag1,tag2,tag3
+lokalise-downloader tag1,tag2,tag3 <apiKey> <projectId>
 ```
 
 Alternativelly, you can pass the `apiKey` and `projectId` through environment variables:
