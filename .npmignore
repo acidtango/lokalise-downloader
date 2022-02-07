@@ -1,0 +1,12 @@
+src
+coverage
+.vscode
+.idea
+node_modules
+.babelrc
+.editorconfig
+.eslintrc.json
+.prettierrc
+renovate.json
+test
+.github

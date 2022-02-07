@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "ES2015",
+    "lib": ["ES2021", "DOM"],
+    "outDir": "./dist",
+    "strict": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "isolatedModules": true
+  },
+  "exclude": ["node_modules", "dist"]
+}

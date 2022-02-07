@@ -1,0 +1,78 @@
+{
+  "name": "@acid-tango/lokalise-downloader",
+  "version": "0.1.0",
+  "description": "A simple npm package for downloading translations from Lokalise",
+  "main": "dist/fetcher.js",
+  "engines": {
+    "node": ">= 12.13.0"
+  },
+  "homepage": "https://github.com/acidtango/lokalise-downloader",
+  "repository": "https://github.com/acidtango/lokalise-downloader",
+  "author": "Acid Tango",
+  "contributors": [
+    "Daniel Ramos <danielramosacosta@hotmail.com>"
+  ],
+  "bin": {
+    "lokalise-downloader": "./dist/bin/lokalise-downloader.js"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf coverage build tmp dist",
+    "build": "tsc -p ./tsconfig.build.json",
+    "lint": "eslint --ext .ts ./src",
+    "lint:fix": "eslint --ext .ts --fix ./src",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.16.8",
+    "@babel/core": "7.16.7",
+    "@babel/plugin-proposal-class-properties": "7.16.7",
+    "@babel/plugin-transform-modules-commonjs": "7.16.8",
+    "@babel/preset-typescript": "7.16.7",
+    "@types/adm-zip": "^0.4.34",
+    "@types/express": "4.17.13",
+    "@types/jest": "27.4.0",
+    "@types/node-fetch": "2.5.12",
+    "@typescript-eslint/eslint-plugin": "5.9.1",
+    "@typescript-eslint/parser": "5.9.1",
+    "babel-jest": "27.4.6",
+    "eslint": "8.6.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-standard": "5.0.0",
+    "express": "4.17.2",
+    "fetch-mock": "^9.11.0",
+    "jest": "27.4.7",
+    "prettier": "2.5.1",
+    "rimraf": "3.0.2",
+    "typescript": "4.5.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleDirectories": [
+      "./node_modules",
+      "./src"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    }
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.9",
+    "change-case": "^4.1.2",
+    "node-fetch": "^2.6.1"
+  }
+}

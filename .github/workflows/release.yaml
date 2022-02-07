@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  tests:
+    name: Test
+    runs-on: ubuntu-latest
+    container: node:lts
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.1
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+          scope: "@acid-tango"
+      - uses: actions/cache@v2.1.6
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
+      - name: Lint
+        run: yarn lint
+      - name: Tests
+        run: yarn test
+      - name: Publish
+        run: yarn publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPMJS_TOKEN}}
