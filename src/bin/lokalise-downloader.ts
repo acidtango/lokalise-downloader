@@ -2,41 +2,57 @@
 
 import { mkdirSync, writeFileSync } from "fs"
 import { downloadLocalesAsJson } from "../fetcher"
+import { Command, Option } from "commander"
 
-const help = `
-Usage: lokalise-downloader tag1,tag2,tag3 <apiKey> <projectId>`
+const program = new Command()
 
-async function main() {
-  const args = process.argv
+program
+  .addOption(
+    new Option("-k, --api-key <apiKey>", "lokalise API key")
+      .env("LOKALISE_API_KEY")
+      .makeOptionMandatory(),
+  )
+  .addOption(
+    new Option("-p, --project-id <projectId>", "lokalise project id")
+      .env("LOKALISE_PROJECT_ID")
+      .makeOptionMandatory(),
+  )
+  .addOption(
+    new Option("-t, --tags <tags>", "lokalise project tags")
+      .argParser((tags) => tags.split(","))
+      .makeOptionMandatory(),
+  )
+  .addOption(
+    new Option("-d, --destination <destination>", "destination folder").default(
+      "./src/locales",
+    ),
+  )
 
-  if (args.includes("-h") || args.includes("--help")) {
-    console.log(help)
-    return
-  }
+program.parse()
 
-  const tagsStr = process.env.LOKALISE_PROJECT_TAGS || process.argv[2]
-  const apiKey = process.env.LOKALISE_API_KEY || process.argv[3]
-  const projectId = process.env.LOKALISE_PROJECT_ID || process.argv[4]
+type CLIOptions = {
+  apiKey: string
+  destination: string
+  projectId: string
+  tags: string[]
+}
 
-  if (!apiKey) throw new Error("Missing apiKey parameter")
-  if (!projectId) throw new Error("Missing projectId parameter")
-  if (!tagsStr) throw new Error("Missing tags parameter")
-
-  const tags = tagsStr.split(",")
-
+async function main({ apiKey, destination, projectId, tags }: CLIOptions) {
   const translations = await downloadLocalesAsJson(apiKey, projectId, tags)
 
-  mkdirSync(`./public/locales`, { recursive: true })
+  mkdirSync(destination, { recursive: true })
 
   translations.forEach((translation) => {
     writeFileSync(
-      `./public/locales/${translation.locale}.json`,
+      `${destination}/${translation.locale}.json`,
       JSON.stringify(translation.content, null, 2),
     )
   })
 }
 
-main().catch((error) => {
+const options = program.opts<CLIOptions>()
+
+main(options).catch((error) => {
   console.error(error)
   process.exit(1)
 })
