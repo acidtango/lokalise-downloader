@@ -3,7 +3,6 @@
 import { mkdirSync, writeFileSync } from "fs"
 import { downloadLocalesAsJson } from "../fetcher"
 import { Command, Option } from "commander"
-import meta from "../../package.json"
 
 const program = new Command()
 
@@ -28,7 +27,7 @@ program
       "./src/locales",
     ),
   )
-  .version(meta.version)
+  .version("0.2.1")
 
 program.parse()
 
