@@ -18,7 +18,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org
           scope: "@acid-tango"
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
