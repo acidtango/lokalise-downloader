@@ -47,7 +47,7 @@
     "eslint-plugin-prettier": "4.2.5",
     "eslint-plugin-promise": "6.6.0",
     "eslint-plugin-standard": "5.0.0",
-    "express": "4.22.1",
+    "express": "4.22.2",
     "fetch-mock": "9.11.0",
     "jest": "27.5.1",
     "prettier": "2.8.8",
